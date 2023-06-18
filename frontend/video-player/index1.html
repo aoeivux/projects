@@ -1,0 +1,649 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]>      <html class="no-js"> <!--<![endif]-->
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title></title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+ 	<link href="https://cdn.bootcdn.net/ajax/libs/animate.css/4.1.1/animate.compat.css" rel="stylesheet">
+	<link rel="stylesheet" href="./css/bulma.min.css">
+	<link rel="stylesheet" href="odometer-theme-default.css" />
+
+</head>
+<style>
+    #frist-row .column {
+        text-align: center;
+        font-size: 24px;
+        height: 150px;
+        margin: 20px 5px;
+        border-radius: 30px;        border: 1px solid pink;
+    }
+
+    #second-row .column {
+        text-align: center;
+        font-size: 24px;
+        height: 300px;
+        margin: 20px 5px;
+        border-radius: 30px;
+        line-height: 276px;
+    }
+
+    #thrid-row .column {
+        text-align: center;
+        font-size: 24px;
+        height: 500px;
+        margin: 20px 5px;
+        border-radius: 30px;
+        line-height: 476px;
+    }
+</style>
+
+<body>
+    <!--[if lt IE 7]>
+            <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="#">upgrade your browser</a> to improve your experience.</p>
+        demo02    静态大屏
+            css   样式文件
+            font  字体文件
+            icon  图标文件
+            imgs  图片素材
+            js    脚本案例
+        将图标集成进来    
+            <![endif]-->
+    <!--第一行-begin-->
+    <div id="frist-row" class="columns is-desktop">
+        <div class="column ">
+            资源总数<br>
+            42102
+        </div>
+        <div class="column">
+            电影<br>
+            30000
+        </div>
+        <div class="column">
+            电视剧<br>
+            10000
+
+        </div>
+        <div class="column">
+            综艺<br>
+            2000
+        </div>
+        <div class="column">
+            动漫<br>
+            3000
+        </div>
+    </div>
+    <!--第一行-end-->
+    <!--第二行-begin-->
+    <div id="second-row" class="columns is-desktop">
+        <div id="month-grow" class="column">
+            月资源增长量
+        </div>
+        <div id="type-proportion" class="column">
+            资源类型占比
+        </div>
+    </div>
+    <!--第二行-end-->
+
+    <!--第三行-begin-->
+    <div id="thrid-row" class="columns is-desktop">
+        <div id="score-order" class="column">
+            资源评分排名TOP10
+        </div>
+        <div id="booking-office-order" class="column">
+            资源票房排名TOP10
+        </div>
+        <div id="popularity-order" class="column">
+            资源人气排名TOP10
+        </div>
+    </div>
+    <!--第三行-end-->
+
+    <script src="https://cdn.bootcdn.net/ajax/libs/echarts/5.4.2/echarts.min.js"></script>
+	<script src="https://cdn.bootcdn.net/ajax/libs/odometer.js/0.4.8/odometer.js"></script>
+    <script>
+        //折线图-begin
+        var monthGrow = echarts.init(document.getElementById('month-grow'));
+        let option1 = {
+            grid: {
+                top: "20%",
+                left: "5%",
+                right: "5%",
+                bottom: "8%",
+                containLabel: true
+            },
+            color: ["#fa8d49", "#ebc93d", "#62dc82", "#7692fe"],
+            tooltip: {
+                trigger: "axis",
+                backgroundColor: "rgba(1, 13, 19, 0.5)",
+                borderWidth: 1,
+                axisPointer: {
+                    type: "shadow"
+                },
+                formatter: function (params) {
+                    var str = "";
+                    if (params.length > 0) {
+                        str = params[0].name + "<br/>";
+                    }
+                    for (var i = 0; i < params.length; i++) {
+                        if (params[i].seriesName !== "") {
+                            str += params[i].seriesName + ":" + params[i].value + "<br/>";
+                        }
+                    }
+                    return str;
+                },
+                textStyle: {
+                    color: "rgba(212, 232, 254, 1)"
+                },
+                extraCssText: "z-index:2"
+            },
+            legend: {
+                right: 20,
+                top: 30,
+                icon: "circle",
+                itemWidth: 15,
+                itemHeight: 10,
+                itemGap: 15,
+                borderRadius: 4,
+                textStyle: {
+                    color: "#000",
+                    fontFamily: "Alibaba PuHuiTi",
+                    fontSize: 14,
+                    fontWeight: 400
+                }
+            },
+            xAxis: {
+                type: "category",
+                data: [
+                    "2013",
+                    "2014",
+                    "2015",
+                    "2016",
+                    "2017",
+                    "2018",
+                    "2019",
+                    "2020",
+                    "2021",
+                    "2022",
+                    "2023"
+                ],
+                axisLine: {
+                    show: false
+                },
+                axisTick: {
+                    show: false
+                },
+                axisLabel: {
+                    show: true,
+                    textStyle: {
+                        color: "#393939" //X轴文字颜色
+                    }
+                }
+            },
+            yAxis: [
+                {
+                    type: "value",
+                    axisLine: {
+                        show: false,
+                        lineStyle: {
+                            color: "#eeeeee"
+                        }
+                    },
+                    axisTick: {
+                        show: false
+                    },
+                    axisLabel: {
+                        color: "#393939",
+                        fontSize: 14
+                    },
+                    splitLine: {
+                        show: true,
+                        lineStyle: {
+                            color: "#e7e9ef",
+                            type: "dashed"
+                        }
+                    }
+                }
+            ],
+            series: [
+                {
+                    name: "论",
+                    type: "line",
+                    symbol: "circle", //标记的图形为实心圆
+                    symbolSize: 0, //标记的大小
+                    lineStyle: {
+                        width: 3,
+                        color: "#fa8d49" // 线条颜色
+                    },
+                    data: [175, 160, 153, 121, 156, 175, 160, 153, 121, 156, 180]
+                },
+                {
+                    name: "专",
+                    type: "line",
+                    symbol: "circle", //标记的图形为实心圆
+                    symbolSize: 0, //标记的大小
+                    lineStyle: {
+                        color: "#ebc93d",
+                        width: 3
+                    },
+                    data: [212, 140, 132, 55, 40, 212, 140, 132, 55, 40, 100]
+                },
+                {
+                    name: "著",
+                    type: "line",
+                    symbol: "circle", //标记的图形为实心圆
+                    symbolSize: 0, //标记的大小
+                    lineStyle: {
+                        color: "#62dc82",
+                        width: 3
+                    },
+                    data: [122, 213, 128, 146, 106, 122, 213, 128, 146, 106, 76]
+                },
+                {
+                    name: "荣誉",
+                    type: "line",
+                    symbol: "circle", //标记的图形为实心圆
+                    symbolSize: 0, //标记的大小
+                    lineStyle: {
+                        color: "#7692fe",
+                        width: 3
+                    },
+                    data: [140, 113, 108, 92, 43, 140, 113, 108, 92, 43, 200]
+                }
+            ]
+        };
+        monthGrow.setOption(option1);
+        //折线图-end
+
+        //饼图-begin
+        var typeProportion = echarts.init(document.getElementById('type-proportion'));
+        let option2 = {
+            backgroundColor: 'white',
+            // title: {
+            //   text: 'Referer of a Website',
+            //   left: 'center',
+            //   top: 20
+            // },
+            tooltip: {
+                show: true,
+                trigger: 'item',
+                //{a}(系列名)，{b}(数据项名),{c}(数值),{d}(百分比)
+                formatter: "{a} <br/>{b} : {c} ({d}%)",
+                backgroundColor: "rgba(1, 13, 19, 0.5)",
+                borderWidth: 1,
+                textStyle: {
+                    color: "rgba(212, 232, 254, 1)",
+                    // fontSize: fontChart(0.24),
+                },
+                // extraCssText: "z-index:2"
+            },
+
+            legend: {
+                orient: 'vertical',
+                top: 20,
+                left: 40,
+                itemWidth: 15,
+                itemHeight: 10,
+                itemGap: 25,
+                borderRadius: 4,
+                textStyle: {
+                    color: "#000",
+                    fontFamily: "Alibaba PuHuiTi",
+                    fontSize: 14,
+                    fontWeight: 400,
+                },
+            },
+            series: [
+                {
+                    name: 'Access From',
+                    type: 'pie',
+                    radius: '50%',
+                    center: ['50%', '40%'],
+                    data: [
+                        { value: 1048, name: 'Search Engine' },
+                        { value: 735, name: 'Direct' },
+                        { value: 580, name: 'Email' },
+                        { value: 484, name: 'Union Ads' },
+                        { value: 300, name: 'Video Ads' }
+                    ],
+                    emphasis: {
+                        itemStyle: {
+                            shadowBlur: 10,
+                            shadowOffsetX: 0,
+                            shadowColor: 'rgba(0, 0, 0, 0.5)'
+                        }
+                    }
+                }
+            ]
+        };
+        typeProportion.setOption(option2)
+        //饼图-end
+
+        //评分排名-begin
+        var scoreOrder = echarts.init(document.getElementById('score-order'));
+        var data = ['99.8', '99.3', '98', '97.9', '97.7', '97.3', '97.3', '97', '97', '96.9'];
+        var className = ['李娟', '张继', '李楠', '王晓鹏', '赵亚南', '康俊', '赵静', '李卓锦', '王媛', '李小娟'];
+        var colorList = ['rgb(10,30,254)', 'rgb(40,60,254)', 'rgb(70,90,255)', 'rgb(100,120,244)', 'rgb(130,150,255)', 'rgb(160,180,254)', 'rgb(190,210,254)', 'rgb(220,240,255)', 'rgb(250,270,244)', 'rgb(280,300,255)'];
+        var defaultData = [130, 130, 130, 130, 130, 130];
+        let option3 = {
+            grid: {
+                left: '5%',
+                right: '5%',
+                bottom: '5%',
+                top: '10%',
+                containLabel: true
+            },
+            tooltip: {
+                trigger: 'axis',
+                axisPointer: {
+                    type: 'none'
+                },
+                formatter: function (params) {
+                    return params[0].name + '<br/>' +
+                        "<span style='display:inline-block;margin-right:5px;width:9px;height:9px;background-color:#00FFFF'></span>" +
+                        // params[0].seriesName + ' : ' + Number((params[0].value.toFixed(4) / 10000).toFixed(2)).toLocaleString() + ' <br/>'
+                        params[0].seriesName + ' : ' + params[0].value + '次'
+                }
+            },
+            backgroundColor: 'white',
+            xAxis: {
+                show: false,
+                type: 'value'
+            },
+            yAxis: [{
+                type: 'category',
+                inverse: true,
+                axisLabel: {
+                    show: true,
+                    textStyle: {
+                        color: 'black'
+                    },
+                },
+                splitLine: {
+                    show: false
+                },
+                axisTick: {
+                    show: false
+                },
+                axisLine: {
+                    show: false
+                },
+                data: className
+            }, {
+                type: 'category',
+                inverse: true,
+                axisTick: 'none',
+                axisLine: 'none',
+                show: false,
+                axisLabel: {
+                    textStyle: {
+                        color: 'black',
+                        fontSize: '12'
+                    },
+                    formatter: function (value) {
+                        return value + ' %';
+                    },
+                },
+                data: data
+            }],
+            series: [{
+                name: '分数',
+                type: 'bar',
+                zlevel: 1,
+                itemStyle: {
+                    normal: {
+                        barBorderRadius: 0,
+                        color: (params) => {
+                            return colorList[params.dataIndex]
+                        }
+                    },
+                },
+                label: {
+                    show: true,
+                    position: 'top', // 位置
+                    color: '#00FFFF',
+                    fontSize: 14,
+                    distance: 2,// 距离
+                    formatter: '{c} 分',
+                }, // 柱子上方的数值
+                barWidth: 8,
+                data: data
+            },
+            {
+                name: '背景',
+                type: 'bar',
+                barWidth: 8,
+                barGap: '-100%',
+                data: defaultData,
+                itemStyle: {
+                    normal: {
+                        color: '#1B375E',
+                        barBorderRadius: 0,
+                    }
+                },
+            },
+            ]
+        };
+        scoreOrder.setOption(option3)
+        //评分排名-end
+
+
+         //票房排名-begin
+         var bookingOfficeOrder = echarts.init(document.getElementById('booking-office-order'));
+        let option4 = {
+            grid: {
+                left: '5%',
+                right: '5%',
+                bottom: '5%',
+                top: '10%',
+                containLabel: true
+            },
+            tooltip: {
+                trigger: 'axis',
+                axisPointer: {
+                    type: 'none'
+                },
+                formatter: function (params) {
+                    return params[0].name + '<br/>' +
+                        "<span style='display:inline-block;margin-right:5px;width:9px;height:9px;background-color:#00FFFF'></span>" +
+                        // params[0].seriesName + ' : ' + Number((params[0].value.toFixed(4) / 10000).toFixed(2)).toLocaleString() + ' <br/>'
+                        params[0].seriesName + ' : ' + params[0].value + '次'
+                }
+            },
+            backgroundColor: 'white',
+            xAxis: {
+                show: false,
+                type: 'value'
+            },
+            yAxis: [{
+                type: 'category',
+                inverse: true,
+                axisLabel: {
+                    show: true,
+                    textStyle: {
+                        color: 'black'
+                    },
+                },
+                splitLine: {
+                    show: false
+                },
+                axisTick: {
+                    show: false
+                },
+                axisLine: {
+                    show: false
+                },
+                data: className
+            }, {
+                type: 'category',
+                inverse: true,
+                axisTick: 'none',
+                axisLine: 'none',
+                show: false,
+                axisLabel: {
+                    textStyle: {
+                        color: 'black',
+                        fontSize: '12'
+                    },
+                    formatter: function (value) {
+                        return value + ' %';
+                    },
+                },
+                data: data
+            }],
+            series: [{
+                name: '分数',
+                type: 'bar',
+                zlevel: 1,
+                itemStyle: {
+                    normal: {
+                        barBorderRadius: 0,
+                        color: (params) => {
+                            return colorList[params.dataIndex]
+                        }
+                    },
+                },
+                label: {
+                    show: true,
+                    position: 'top', // 位置
+                    color: '#00FFFF',
+                    fontSize: 14,
+                    distance: 2,// 距离
+                    formatter: '{c} 分',
+                }, // 柱子上方的数值
+                barWidth: 8,
+                data: data
+            },
+            {
+                name: '背景',
+                type: 'bar',
+                barWidth: 8,
+                barGap: '-100%',
+                data: defaultData,
+                itemStyle: {
+                    normal: {
+                        color: '#1B375E',
+                        barBorderRadius: 0,
+                    }
+                },
+            },
+            ]
+        };
+        bookingOfficeOrder.setOption(option4)
+        //票房排名-end
+
+        //人气排名-begin
+        var popularityOrder = echarts.init(document.getElementById('popularity-order'));
+        let option5 = {
+            grid: {
+                left: '5%',
+                right: '5%',
+                bottom: '5%',
+                top: '10%',
+                containLabel: true
+            },
+            tooltip: {
+                trigger: 'axis',
+                axisPointer: {
+                    type: 'none'
+                },
+                formatter: function (params) {
+                    return params[0].name + '<br/>' +
+                        "<span style='display:inline-block;margin-right:5px;width:9px;height:9px;background-color:#00FFFF'></span>" +
+                        // params[0].seriesName + ' : ' + Number((params[0].value.toFixed(4) / 10000).toFixed(2)).toLocaleString() + ' <br/>'
+                        params[0].seriesName + ' : ' + params[0].value + '次'
+                }
+            },
+            backgroundColor: 'white',
+            xAxis: {
+                show: false,
+                type: 'value'
+            },
+            yAxis: [{
+                type: 'category',
+                inverse: true,
+                axisLabel: {
+                    show: true,
+                    textStyle: {
+                        color: 'black'
+                    },
+                },
+                splitLine: {
+                    show: false
+                },
+                axisTick: {
+                    show: false
+                },
+                axisLine: {
+                    show: false
+                },
+                data: className
+            }, {
+                type: 'category',
+                inverse: true,
+                axisTick: 'none',
+                axisLine: 'none',
+                show: false,
+                axisLabel: {
+                    textStyle: {
+                        color: 'black',
+                        fontSize: '12'
+                    },
+                    formatter: function (value) {
+                        return value + ' %';
+                    },
+                },
+                data: data
+            }],
+            series: [{
+                name: '分数',
+                type: 'bar',
+                zlevel: 1,
+                itemStyle: {
+                    normal: {
+                        barBorderRadius: 0,
+                        color: (params) => {
+                            return colorList[params.dataIndex]
+                        }
+                    },
+                },
+                label: {
+                    show: true,
+                    position: 'top', // 位置
+                    color: '#00FFFF',
+                    fontSize: 14,
+                    distance: 2,// 距离
+                    formatter: '{c} 分',
+                }, // 柱子上方的数值
+                barWidth: 8,
+                data: data
+            },
+            {
+                name: '背景',
+                type: 'bar',
+                barWidth: 8,
+                barGap: '-100%',
+                data: defaultData,
+                itemStyle: {
+                    normal: {
+                        color: '#1B375E',
+                        barBorderRadius: 0,
+                    }
+                },
+            },
+            ]
+        };
+        popularityOrder.setOption(option5)
+        //人气排名-end
+
+
+    </script>
+</body>
+
+</html>

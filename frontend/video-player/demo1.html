@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title></title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="css/style.css" rel="stylesheet">
+  </head>
+  <body>
+    <div id="dplayer"></div>
+    <script src="DPlayer.min.js"></script>
+    <script src="hls.js"></script>
+    <script>
+      import DPlayer from 'dplayer';
+      const dp = new DPlayer({
+      container: document.getElementById('dplayer'),
+        video: {
+            url: 'demo.m3u8',
+            type: 'hls',
+        },
+        pluginOptions: {
+            hls: {
+                // hls config
+            },
+        },
+      });
+
+      console.log(dp.plugins.hls); // Hls instance
+
+      const axios = require('axios');
+
+      // 向给定ID的用户发起请求
+      axios.get('/user?ID=12345')
+        .then(function (response) {
+          // 处理成功情况
+          console.log(response);
+        })
+        .catch(function (error) {
+          // 处理错误情况
+          console.log(error);
+        })
+        .then(function () {
+          // 总是会执行
+        });
+
+    </script>
+  </body>
+</html>

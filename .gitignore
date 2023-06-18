@@ -1,0 +1,62 @@
+# cache
+__pycache__
+.DS_Store
+font
+fonts
+target
+# py model migrations
+migrations
+# node_modules
+node_modules
+# 忽略大文件
+*.tar
+*.zip
+*.gz
+*.rar
+*.7z
+*.dmg
+*.iso
+
+# 忽略编译生成的文件
+*.class
+*.o
+*.obj
+
+# 忽略日志文件
+*.log
+
+# 忽略临时文件
+*.tmp
+*.swp
+*~
+
+# 忽略IDE/编辑器生成的文件
+.idea/
+.vscode/
+*.iml
+*.ipr
+*.iws
+
+# 忽略图片文件
+*.jpg
+*.jpeg
+*.png
+*.gif
+*.bmp
+
+# 忽略音频/视频文件
+*.mp3
+*.mp4
+*.wav
+*.avi
+
+# 忽略压缩文件
+*.tar.gz
+*.tgz
+*.rar
+*.zip
+*.7z
+
+# others
+webdriver
+
